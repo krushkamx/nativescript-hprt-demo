@@ -1,0 +1,37 @@
+<ActionBar title="Printer test" class="action-bar">
+</ActionBar>
+
+<GridLayout class="page" rows="auto, *, auto" columns="*">
+    <GridLayout row="0" rows="auto, auto" columns="*,*">
+        <Button col="0" row="0" class="btn btn-primary" text="Enable bluetooth" [isEnabled]="!btEnabled" (tap)="enableBluetooth()"></Button>
+        <Button *ngIf="!selected" col="1" row="0" class="btn btn-primary" text="Search Printers" (tap)="searchPrinters()"></Button>
+        <Button *ngIf="selected" col="1" row="0" class="btn btn-primary" text="Disconnect" (tap)="disconnect()"></Button>
+        <Label col="0" colSpan="2" row="1" [text]="connected" horizontalAlignment="left"></Label>
+    </GridLayout>
+   
+    <ListView row="1" [items]="items" class="list-group" *ngIf="!selected">
+        <ng-template let-item="item">
+            <Label text="{{item.modelName}} ({{item.portName}})" class="list-group-item" (tap)="connect(item)"></Label>
+        </ng-template>
+    </ListView>
+
+    <GridLayout row="2" rows="auto, auto, auto, auto" columns="*,*,*">
+        
+        <Button col="0" row="0" class="btn btn-primary" text="Simple Text" (tap)="printTextSimple()"></Button>
+        <Button col="1" row="0" class="btn btn-primary" text="Sample receipt" (tap)="printReceipt()"></Button>
+        <Button col="3" row="0" class="btn btn-primary" text="White text" (tap)="printTextWhite()"></Button>        
+
+        <Button col="0" row="1" class="btn btn-primary" text="Underline" (tap)="printTextUnderline()"></Button>
+        <Button col="1" row="1" class="btn btn-primary" text="Bold" (tap)="printTextBold()"></Button>
+        <Button col="3" row="1" class="btn btn-primary" text="Mini" (tap)="printTextMini()"></Button>
+
+        <Button col="0" row="2" class="btn btn-primary" text="Double Text" (tap)="printDoubleText()"></Button>
+        <Button col="1" row="2" class="btn btn-primary" text="Double width" (tap)="printDoubleTextWidth()"></Button>
+        <Button col="2" row="2" class="btn btn-primary" text="Double Height" (tap)="printDoubleTextHeight()"></Button>
+
+        <Button col="0" row="3" class="btn btn-primary" text="Left text" (tap)="printTextLeft()"></Button>
+        <Button col="1" row="3" class="btn btn-primary" text="Center text" (tap)="printTextCenter()"></Button>
+        <Button col="2" row="3" class="btn btn-primary" text="Right text" (tap)="printTextRight()"></Button>
+        
+    </GridLayout>
+</GridLayout>
