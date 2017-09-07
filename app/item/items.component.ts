@@ -52,7 +52,6 @@ export class ItemsComponent implements OnInit {
     searchPrinters() {
         this.hprt.searchPrinters().then(printers => {
             this.items = printers;
-            //console.log("printers", JSON.stringify(printers));
         });
     }
 
@@ -82,7 +81,6 @@ export class ItemsComponent implements OnInit {
 
     printTextSimple() {      
         this.hprt.printTextSimple(this.text);
-        //this.hprt.newLine(2);
     }
 
     printReceipt() {
