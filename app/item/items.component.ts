@@ -33,7 +33,7 @@ export class ItemsComponent implements OnInit {
     ngOnInit(): void {
         
         // Enable bluetooth
-        this.enableBluetooth();
+        //this.enableBluetooth();
 
     }
 
@@ -41,9 +41,9 @@ export class ItemsComponent implements OnInit {
 
         console.log("Enabling bluetooth...");
 
-        this.hprt.EnableBluetooth().then((res) => {
+        this.hprt.enableBluetooth().then((res) => {
             console.log("Enabled", res);
-            this.btEnabled = true;
+            this.btEnabled = this.hprt.isBluetoothEnabled();
         }, (err) => {
             console.log("Error", err);
         })
@@ -77,7 +77,7 @@ export class ItemsComponent implements OnInit {
             console.log("error", err)
         })
 
-    }
+    }    
 
     printTextSimple() {      
         this.hprt.printTextSimple(this.text);
