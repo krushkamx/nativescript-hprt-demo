@@ -6,7 +6,7 @@
   "nativescript": {
     "id": "org.nativescript.nativescripttesthprt",
     "tns-android": {
-      "version": "3.1.1"
+      "version": "3.2.0"
     }
   },
   "dependencies": {
@@ -19,7 +19,8 @@
     "@angular/platform-browser": "~4.2.0",
     "@angular/router": "~4.2.0",
     "nativescript-angular": "~4.2.0",
-    "nativescript-hprt": "^0.9.5",
+    "nativescript-hprt": "^0.9.6",
+    "nativescript-loading-indicator": "^2.4.0",
     "nativescript-theme-core": "~1.0.2",
     "reflect-metadata": "~0.1.8",
     "rxjs": "~5.4.2",

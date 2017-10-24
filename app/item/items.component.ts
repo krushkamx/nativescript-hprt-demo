@@ -6,6 +6,8 @@ import { ItemService } from "./item.service";
 import * as application from 'application';
 import { Hprt, HPRTPrinter } from "nativescript-hprt";
 
+import { LoadingIndicator } from "nativescript-loading-indicator";
+
 @Component({
     selector: "ns-items",
     moduleId: module.id,
@@ -20,6 +22,8 @@ export class ItemsComponent implements OnInit {
     selected: boolean;
     btEnabled: boolean;
 
+    loader: any; 
+
     // This pattern makes use of Angular’s dependency injection implementation to inject an instance of the ItemService service into this class. 
     // Angular knows about this service because it is included in your app’s main NgModule, defined in app.module.ts.
     constructor(private itemService: ItemService) {
@@ -27,26 +31,33 @@ export class ItemsComponent implements OnInit {
         this.hprt = new Hprt();
         this.connected = "== NO CONNECTION ==";
         this.selected = false;
-        this.btEnabled = false;
+        this.btEnabled = this.hprt.isBluetoothEnabled();
+        this.loader = new LoadingIndicator();
     }
 
-    ngOnInit(): void {
-        
-        // Enable bluetooth
-        //this.enableBluetooth();
+    ngOnInit(): void {        
+        // Enable bluetooth at start
+        // this.enableBluetooth();
 
     }
 
     enableBluetooth() {
 
         console.log("Enabling bluetooth...");
+        this.loader.show();
 
         this.hprt.enableBluetooth().then((res) => {
             console.log("Enabled", res);
-            this.btEnabled = this.hprt.isBluetoothEnabled();
+            this.btEnabled = true;
+            this.loader.hide();
         }, (err) => {
             console.log("Error", err);
-        })
+            this.loader.hide();
+        });
+    }
+
+    isBluetoothEnabled() {
+        return this.hprt.isBluetoothEnabled();
     }
 
     searchPrinters() {
@@ -56,13 +67,16 @@ export class ItemsComponent implements OnInit {
     }
 
     connect(port) {
+        this.loader.show();
 
         this.hprt.connect(port).then((res) => {
             console.log("success", res);
             this.connected = "== PRINTER CONNECTED ==";
             this.selected = true;
+            this.loader.hide();
         }, (err) => {
             console.log("error", err)
+            this.loader.hide();
         })
 
     }
